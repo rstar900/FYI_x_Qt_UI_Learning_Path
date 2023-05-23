@@ -15,6 +15,7 @@ Rectangle {
     width: Constants.width
     height: Constants.height
     color: "#000000"
+    property bool isDialogOpen: false
 
 
     Text {
@@ -43,6 +44,11 @@ Rectangle {
         anchors.rightMargin: 10
         anchors.leftMargin: 10
         anchors.bottomMargin: 10
+
+        Connections {
+            target: addToDoButton
+            onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
+        }
     }
 
 
@@ -52,6 +58,7 @@ Rectangle {
         y: 571
         width: 380
         height: 157
+        opacity: rectangle.isDialogOpen
         color: "#323232"
         radius: 30
 
@@ -78,12 +85,22 @@ Rectangle {
                 id: cancelButton
                 text: qsTr("CANCEL")
                 Layout.fillWidth: true
+
+                Connections {
+                    target: cancelButton
+                    onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
+                }
             }
 
             Button {
                 id: addButton
                 text: qsTr("ADD")
                 Layout.fillWidth: true
+
+                Connections {
+                    target: addButton
+                    onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
+                }
             }
         }
     }
