@@ -99,7 +99,8 @@ Rectangle {
 
                 Connections {
                     target: addButton
-                    onClicked: myListModel.append(myListModel.createListElement())
+                    // The logic to not add empty toDoItem
+                    onClicked: if(toDoTextInput.text != "") myListModel.append(myListModel.createListElement())
                 }
             }
         }
