@@ -70,7 +70,7 @@ Rectangle {
             anchors.rightMargin: 25
             anchors.leftMargin: 25
             anchors.topMargin: 25
-            placeholderText: qsTr("Text Field")
+            placeholderText: qsTr("My To Do")
         }
 
         RowLayout {
@@ -88,7 +88,7 @@ Rectangle {
 
                 Connections {
                     target: cancelButton
-                    onClicked: rectangle.isDialogOpen = false
+                    onClicked: toDoTextInput.text = ""
                 }
             }
 
@@ -99,32 +99,65 @@ Rectangle {
 
                 Connections {
                     target: addButton
-                    onClicked: rectangle.isDialogOpen = false
+                    onClicked: myListModel.append(myListModel.createListElement())
                 }
             }
         }
     }
 
 
-    Rectangle {
-        id: toDoItem
-        x: 17
-        y: 57
-        width: 367
-        height: 59
-        color: "#494949"
-        radius: 10
+    Column {
+        id: column
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        spacing: 20
+        anchors.rightMargin: 10
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 100
+        anchors.topMargin: 50
 
-        CheckBox {
-            id: checkBox
-            text: qsTr("Check Box")
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            font.pointSize: 22
-            anchors.leftMargin: 0
-            anchors.bottomMargin: 0
-            anchors.topMargin: 0
+        Repeater {
+            id: repeater
+            anchors.fill: parent
+
+            // ListModel needed to add toDoItems
+            model: ListModel {
+                id: myListModel
+                ListElement {
+                    name: "My To Do"
+                }
+
+                function createListElement() {
+                    return {
+                        "name": toDoTextInput.text
+                    }
+                }
+            }
+
+
+            Rectangle {
+                id: toDoItem
+                x: 7
+                y: 7
+                width: 367
+                height: 59
+                color: "#494949"
+                radius: 10
+
+                CheckBox {
+                    id: checkBox
+                    text: name // to reflect the name as ListElement
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    font.pointSize: 22
+                    anchors.leftMargin: 0
+                    anchors.bottomMargin: 0
+                    anchors.topMargin: 0
+                }
+            }
         }
     }
 
