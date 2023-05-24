@@ -88,7 +88,7 @@ Rectangle {
 
                 Connections {
                     target: cancelButton
-                    onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
+                    onClicked: rectangle.isDialogOpen = false
                 }
             }
 
@@ -99,7 +99,7 @@ Rectangle {
 
                 Connections {
                     target: addButton
-                    onClicked: rectangle.isDialogOpen = !rectangle.isDialogOpen
+                    onClicked: rectangle.isDialogOpen = false
                 }
             }
         }
