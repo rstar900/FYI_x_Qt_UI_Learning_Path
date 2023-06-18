@@ -100,7 +100,14 @@ Rectangle {
                 Connections {
                     target: addButton
                     // The logic to not add empty toDoItem
-                    onClicked: if(toDoTextInput.text != "") myListModel.append(myListModel.createListElement())
+                    onClicked: {
+                        if(toDoTextInput.text != "") {
+                            myListModel.append(myListModel.createListElement())
+                        // Also need to close the addToDoDialog
+                        rectangle.isDialogOpen = false
+                        }
+                    }
+
                 }
             }
         }
@@ -160,6 +167,11 @@ Rectangle {
                 }
             }
         }
+    }
+
+    Connections {
+        target: rectangle
+        onClicked: console.log("clicked")
     }
 
     states: [
